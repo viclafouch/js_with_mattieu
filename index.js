@@ -172,6 +172,7 @@ const usersMoreOlder = users.map((user) => {
   user.age++
   return user
 })
+
 // SAME AS
 const usersMoreOlder_ = users.map(function (user) {
   user.age++
@@ -192,3 +193,40 @@ const total = users.reduce(function (previousValue, currentValue) {
 }, 0)
 
 console.log(total)
+
+const colors = ['red', 'blue', 'yellow', '#CECECE']
+const h1 = document.querySelector('h1')
+const p = document.querySelector('p')
+const input = document.querySelector('input')
+const clearButton = document.querySelector('button')
+const ol = document.getElementById('list-colors')
+
+
+console.log(ol)
+
+for (const color of colors) {
+  
+  const li = document.createElement('li')
+  li.textContent = color
+  ol.appendChild(li)
+  // Changer au clic sur le li la couleur de texte en question.
+}
+
+input.addEventListener('input', function () {
+  p.textContent = this.value
+})
+
+h1.addEventListener('mouseover', function() {
+  h1.textContent = 'clické'
+})
+
+clearButton.addEventListener('click', function() {
+  input.value = ''
+  p.textContent = ''
+})
+
+
+
+
+
+
