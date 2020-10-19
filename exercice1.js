@@ -40,49 +40,56 @@ const users = [
   },
 ]
 
+const ol = document.querySelector("ol")
+const formUsers = document.getElementById("users_form")
 
-const usersListElem = document.getElementById('utilisateurs')
-const formAddUser = document.getElementById("users_form")
-const errorMessage = document.getElementById("error")
 
 function displayUser(param1) {
+
   const li = document.createElement('li')
   const p = document.createElement('p')
   const button = document.createElement('button')
-  button.textContent = 'Remove user'
-  p.textContent = "Nom : " + param1.name + ", Age = " + param1.age
+  button.textContent = "supprimer"
   li.appendChild(p)
   li.appendChild(button)
-  usersListElem.appendChild(li)
+  p.textContent = "name = " + param1.name + ", age = " + param1.age
+  ol.appendChild(li)
 
-  button.addEventListener('click', function () {
+  button.addEventListener('click', function(){
+
     const userId = param1.id
-    console.log(param1)
     const userIndex = users.findIndex(u => u.id === userId)
-    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/splice
-    users.splice(userIndex, 1)
-    li.remove()
+    console.log(userIndex)
+
+    users.splice(userIndex, 1 );
     console.log(users)
+    li.remove()
+
   })
+
 }
 
-for (const user of users) {
-  displayUser(user) 
+for (user of users) {
+
+  displayUser(user)
+
 }
 
-formAddUser.addEventListener('submit', function (event) {
+formUsers.addEventListener('submit',function(event){
+
   event.preventDefault()
-
+  const name = document.getElementById('name').value
+  const age = parseInt(document.getElementById('age').value)
+  const position = document.getElementById('position').value
+  const gender = document.getElementById('gender').value
   const lastUser = users[users.length - 1]
-
-  const id = users.length === 0 ? 1 : lastUser.id + 1
-  const name = document.getElementById("name").value
-  const age = parseInt(document.getElementById("age").value)
-  const position = document.getElementById("position").value
-  const gender = document.getElementById("gender").value
-
-  const newUser = { id, name, age, position, gender }
+  const id = lastUser === 0 ? 1 : lastUser.id + 1
+  const newUser = {id, name, age, position, gender}
 
   users.push(newUser)
-  displayUser(newUser) 
+  displayUser(newUser)
+
 })
+
+
+
