@@ -1,15 +1,3 @@
-const openModalBtnElem = document.getElementById('open-modal-btn')
-const modalElem = document.getElementById('newsletter-modal')
-const modalBody = document.querySelector('.modal-body')
-const modalOverlay = document.querySelector('.modal-overlay')
-const userInput = document.getElementById('newsletter-email')
-const messageSuccess = document.createElement('p')
-messageSuccess.classList.add('success')
-
-const userForm = document.getElementById('newsletter-form')
-
-const emails = []
-
 /**
 Exercice : Au clic sur la modal, supprimer la classe "modal-hide" de la div .modal. Cela permettra à notre modal de s'afficher. 
 A l'ouverture de la modal, le formulaire doit TOUJOURS etre vide. 
@@ -22,39 +10,41 @@ La modal doit pouvoir se fermer, pour se faire, si l'on click en dehors du cadre
 /!\ Créer une fonction permettant de faire un toggle de notre class "modal-hide"
 */
 
-function toggleClassModal() {
+const openModalElem = document.getElementById('open-modal-btn')
+const modalElem = document.getElementById('newsletter-modal')
+const modalBody = document.querySelector('.modal-body')
+const overlayELem = document.querySelector('.modal-overlay')
+const userForm = document.getElementById('newsletter-form')
+const inputElem = document.getElementById('newsletter-email')
+const messageSuccess = document.createElement('p')
+messageSuccess.classList.add('success')
+const emailsArray = []
 
-    var element = document.getElementById("myDIV");
-    modalElem.classList.toggle("modal-hide");
 
-}
+openModalElem.addEventListener('click', function() {
+    toggleHideModal()
+})
+overlayELem.addEventListener('click', function() {
+    toggleHideModal()
 
-userForm.addEventListener('submit', function(e){
+})
+
+userForm.addEventListener('submit', function(e) {
 
     e.preventDefault()
-    const userEmail = userInput.value
-
-    if (userEmail) {
-        
-        messageSuccess.textContent = 'Votre adresse a bien été ajoutée'
-        modalBody.appendChild(messageSuccess)
-        emails.push(userEmail)
-        userInput.value=''
-        console.log(emails)
-    
+    const email = inputElem.value
+    modalBody.appendChild(messageSuccess)
+    if (email) {
+        emailsArray.push(email)
+        messageSuccess.textContent = "votre email a bien été ajouté"
+        inputElem.value = ''
     } else {
-
-        messageSuccess.textContent = 'Veuillez entrer une adresse e-mail'
-        modalBody.appendChild(messageSuccess)
+        messageSuccess.textContent = "veuillez entrer une adresse mail"
     }
-
+    console.log(emailsArray)
 })
 
-openModalBtnElem.addEventListener('click',function(){
-    toggleClassModal()
-})
-
-modalOverlay.addEventListener('click',function(){
-    toggleClassModal()
-    messageSuccess.remove()    
-})
+function toggleHideModal() {
+    modalElem.classList.toggle('modal-hide')
+    messageSuccess.remove()
+}
